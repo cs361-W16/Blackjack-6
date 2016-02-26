@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+   <meta charset="utf-8">
+<!--<link rel="stylesheet" href="assign2.css">-->
+   <title>Black Jack!</title>
+<style>
+#welcome{
+	font-family: Arial, Helveica, sans-serif;
+	font-size: 240%;
+	text-align: center;
+}
+h3{
+	font-family: Arial, Helveica, sans-serif;
+	text-align: center;
+} 
+#ai,#sb{
+	width:70%;
+	border: 1px solid black;
+    border-collapse: collapse;
+    position: relative; 
+    font-family: Arial, Helveica, sans-serif;
+}
+#intro{
+	float:left;
+	font-family: Arial, Helveica, sans-serif;
+	width:20%;
+}
+#balance{
+	font-family: Arial, Helveica, sans-serif;
+}
+
+
+
+
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e));
+	background:-moz-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-webkit-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-o-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-ms-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e',GradientType=0);
+	background-color:#f0c911;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #e65f44;
+	display:inline-block;
+	cursor:pointer;
+	color:#c92200;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 5px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ded17c;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911));
+	background:-moz-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-webkit-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-o-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-ms-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911',GradientType=0);
+	background-color:#f2ab1e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+</style>
+</head>
+<body background="http://web.engr.oregonstate.edu/~liujiaw/cs361/wood.jpg">
+	<p id="welcome"> Welcome to Black Jack !!!</p>
+<div id="intro">
+<h3>Rules of Black Jack</h3>
+<ol>
+<li>After all the players have dealt their hand, the dealer will show all the cards in their hand.</li>
+<li>The dealer then adds up their cards according to the rules. For Aces, the dealer must score them as 11, unless doing so causes them to bust. (lose the hand)</li>
+<li> If the dealer's hand is worth less then 17, the dealer will hit </li>
+<li> If the dealer's hand is worth 17 or more, the dealer will hold</li>
+<li> If at any point the dealer's hand is worth more then 21, then the dealer immediately looses and the player wins.</li>
+<li> At the end of the round, any player with more points then the dealer's hand (but both are less then 21) wins.</li>
+<li> If they have the same amount of points, then the money stays where it is, and a new game is started.</li>
+</ol>
+</div>
+
+<div id="balance">
+<h4>Your Balance: <span id="number"> </span></h4><br><br>
+</div>
+
+<table id="ai" width=>
+<caption>Dealer Cards</caption>
+<tr><td id="ai_point">2333A </td></tr>
+<tr>
+<td id="ai1">  </td>
+<td id="ai2">  </td>
+<td id="ai3">  </td>
+<td id="ai4">  </td>
+<td id="ai5">  </td>
+<td id="ai6">  </td>
+</tr>
+</table>
+
+<br><br><br>
+
+<table id="sb">
+<caption>Your Cards</caption>
+<tr><td id="sb_point">2333X </td></tr>
+<tr>
+<td id="sb1">  </td>
+<td id="sb2">  </td>
+<td id="sb3">  </td>
+<td id="sb4">  </td>
+<td id="sb5">  </td>
+<td id="sb6">  </td>
+</tr>
+</table>
+
+<div id="sbchoose">
+<button class="myButton" id="hit">Hit</button>
+<button class="myButton" id="stay">Stay</button>
+<button class="myButton" id="fold">Fold</button>
+<button class="myButton" id="double">Double Down</button>
+<button class="myButton" id="split">Split</button>
+</div>
+
+<footer>
+
+</footer>
+</body>
+</html>
