@@ -36,6 +36,8 @@ public class Game {
         player.holder.get(0).add(deck.get(deck.size()-1));
         deck.remove(deck.size()-1);
     }
+
+
     public void customDeal (int c1){
         player.holder.get(0).add(deck.get(c1));
         deck.remove(c1);
