@@ -29,12 +29,21 @@ h3{
 #balance{
 	font-family: Arial, Helveica, sans-serif;
 }
-
-
+#msg{
+	font-family: Arial, Helveica, sans-serif;
+	font-size:110%;
+}
+#wrong{
+	font-family: Arial, Helveica, sans-serif;
+	font-size:110%;
+	color:red;
+	
+}
 
 
 
 .myButton {
+	margin-left:1.5em;
 	-moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
 	box-shadow:inset 0px 1px 0px 0px #f9eca0;
@@ -76,7 +85,7 @@ h3{
 }
 </style>
 </head>
-<body background="http://web.engr.oregonstate.edu/~liujiaw/cs361/wood.jpg">
+<body background="http://web.engr.oregonstate.edu/~liujiaw/cs361/wood2.jpg">
 	<p id="welcome"> Welcome to Black Jack !!!</p>
 <div id="intro">
 <h3>Rules of Black Jack</h3>
@@ -92,12 +101,14 @@ h3{
 </div>
 
 <div id="balance">
-<h4>Your Balance: <span id="number"> </span></h4><br><br>
+<h4>Your Balance: <span id="number">输的你连裤衩也穿不上</span></h4><br><br>
 </div>
+
+<p id="msg"> Incorrect action shows here:&nbsp&nbsp<mark id="wrong"> Poi~~~</mark></p>
 
 <table id="ai" width=>
 <caption>Dealer Cards</caption>
-<tr><td id="ai_point">2333A </td></tr>
+<tr><td id="ai_point">I am your master </td></tr>
 <tr>
 <td id="ai1">  </td>
 <td id="ai2">  </td>
@@ -112,7 +123,7 @@ h3{
 
 <table id="sb">
 <caption>Your Cards</caption>
-<tr><td id="sb_point">2333X </td></tr>
+<tr><td id="sb_point">233 sb</td></tr>
 <tr>
 <td id="sb1">  </td>
 <td id="sb2">  </td>
@@ -124,6 +135,7 @@ h3{
 </table>
 
 <div id="sbchoose">
+<button class="myButton" id="start">Start Game</button>
 <button class="myButton" id="hit">Hit</button>
 <button class="myButton" id="stay">Stay</button>
 <button class="myButton" id="fold">Fold</button>
