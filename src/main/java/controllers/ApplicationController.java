@@ -58,16 +58,25 @@ public class ApplicationController {
         Game g = new Game();
         g.buildDeck();
         g.shuffle();
-        g.deal();
-
+        g.P_value=g.player.calculate();
+        g.D_value=g.dealer.calculate_d();
         return Results.json().render(g);
     }
-
-    public Result dealPost(Context context, Game g) {
-        if(context.getRequestPath().contains("hit")){
-            g.deal();
+    public Result start (Context context, Game g){
+        if(context.getRequestPath().contains("Start")) {
+            g.deal_player();
+            g.deal_player();
+            g.deal_dealer();
+            g.deal_dealer();
+            g.place_bet(2);
+            g.P_value=g.player.calculate();
+            g.D_value=g.dealer.calculate_d();
+            if (g.P_value==21){
+                g.assign_bet();
+                g.user_win=1;
+                g.bet_amount=0;
+            }
         }
         return Results.json().render(g);
     }
-
 }
