@@ -76,7 +76,82 @@ public class Game {
         else {
             return false;
         }
-
+    }
+    public void split (){
+        player_s.holder.get(0).add(player.holder.get(0).get(player.card_count-1));
+        player.holder.get(0).remove(player.card_count-1);
+        player.card_count-=1;
+        deal_player();
+        player_s.card_count+=1;
+        deal_player_s();
+        split =true;
+    }
+    public void card_back(){
+        player.holder.get(0).clear();
+        player.card_count=0;
+        for(int i=0;i<player_s.card_count;i++){
+            player.holder.get(0).add(player_s.holder.get(0).get(i));
+            player.card_count+=1;
+        }
+        player_s.card_count=0;
+        player_s.holder.get(0).clear();
+        split=false;
+    }
+    public int compare () {
+        int player_value;
+        int dealer_value;
+        int check;
+        check=0;                                //push
+        player_value=player.calculate();
+        dealer_value=dealer.calculate_d();
+        if (check_brust(player_value))
+        {
+            check=2;    // dealer win
+        }
+        else if (check_brust(dealer_value))
+        {
+            check=1;    // player win
+        }
+        else {
+            if (player_value>dealer_value ){
+                check=1;
+            }
+            else if (dealer_value>player_value){
+                check=2;
+            }
+            else {
+                check=0;
+            }
+        }
+        return check;
+    }
+    public int compare_s () {
+        int player_value_s;
+        int dealer_value;
+        int check;
+        check=0;                                //push
+        player_value_s=player_s.calculate();
+        dealer_value=dealer.calculate_d();
+        if (check_brust(player_value_s))
+        {
+            check=2;    // dealer win
+        }
+        else if (check_brust(dealer_value))
+        {
+            check=1;    // player win
+        }
+        else {
+            if (player_value_s>dealer_value ){
+                check=1;
+            }
+            else if (dealer_value>player_value_s){
+                check=2;
+            }
+            else {
+                check=0;
+            }
+        }
+        return check;
     }
     public void customDeal_p (int c1){
         player.holder.get(0).add(deck.get(c1));
