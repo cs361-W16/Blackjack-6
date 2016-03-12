@@ -7,7 +7,5 @@ import java.util.ArrayList;
  */
 public abstract class Gamer {
     public java.util.List<java.util.List<Card>> holder = new ArrayList<>();
-    public Gamer () {
-
-    }
+    public int card_count;
 }
