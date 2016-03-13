@@ -3,6 +3,7 @@
 <head lang="en">
    <meta charset="utf-8">
 <!--<link rel="stylesheet" href="assign2.css">-->
+	<script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
    <title>Black Jack!</title>
 <style>
 #welcome{
@@ -92,47 +93,356 @@ h3{
 </div>
 
 <div id="balance">
-<h4>Your Balance: <span id="number"> </span></h4><br><br>
+<h4>Your Balance: <span id="number"> </span>  Bet Amount: <span id="number_1"> </span></h4><br><br>
 </div>
 
-<table id="ai" width=>
-<caption>Dealer Cards</caption>
-<tr><td id="ai_point">2333A </td></tr>
-<tr>
-<td id="ai1">  </td>
-<td id="ai2">  </td>
-<td id="ai3">  </td>
-<td id="ai4">  </td>
-<td id="ai5">  </td>
-<td id="ai6">  </td>
-</tr>
-</table>
+<div id="game">
+	<table class="sbgame">
+		<tr class="title">
+			<td class="col">Player</td>
+			<td class="col">Dealer</td>
+		</tr>
 
-<br><br><br>
-
-<table id="sb">
-<caption>Your Cards</caption>
-<tr><td id="sb_point">2333X </td></tr>
-<tr>
-<td id="sb1">  </td>
-<td id="sb2">  </td>
-<td id="sb3">  </td>
-<td id="sb4">  </td>
-<td id="sb5">  </td>
-<td id="sb6">  </td>
-</tr>
-</table>
+		<tr><td class="columnOfCards" id="c0">
+			<table>
+				<tr><td class="cardLocation l0"></td></tr>
+				<tr><td class="cardLocation l1"></td></tr>
+				<tr><td class="cardLocation l2"></td></tr>
+				<tr><td class="cardLocation l3"></td></tr>
+				<tr><td class="cardLocation l4"></td></tr>
+				<tr><td class="cardLocation l5"></td></tr>
+				<tr><td class="cardLocation l6"></td></tr>
+			</table>
+		</td>
+			<td class="columnOfCards" id="c2">
+			<table>
+				<tr><td class="cardLocation l0"></td></tr>
+				<tr><td class="cardLocation l1"></td></tr>
+				<tr><td class="cardLocation l2"></td></tr>
+				<tr><td class="cardLocation l3"></td></tr>
+				<tr><td class="cardLocation l4"></td></tr>
+				<tr><td class="cardLocation l5"></td></tr>
+				<tr><td class="cardLocation l6"></td></tr>
+			</table>
+		</td>
+			<td class="columnOfCards" id="c1">
+				<table>
+					<tr><td class="cardLocation l0"></td></tr>
+					<tr><td class="cardLocation l1"></td></tr>
+					<tr><td class="cardLocation l2"></td></tr>
+					<tr><td class="cardLocation l3"></td></tr>
+					<tr><td class="cardLocation l4"></td></tr>
+					<tr><td class="cardLocation l5"></td></tr>
+					<tr><td class="cardLocation l6"></td></tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<h5>Your value: <span id="Y_value"> </span> Your second hand value: <span id="Y_value_s"> </span> Dealer value: <span id="D_value"> </span></h5>
+	<h6><span id="reslut2"> </span> </h6>
+	<h6><span id="reslut3"> </span> </h6>
+</div>
 
 <div id="sbchoose">
 <button class="myButton" id="hit">Hit</button>
+<button class="myButton" id="hit2">Hit2</button>
 <button class="myButton" id="stay">Stay</button>
-<button class="myButton" id="fold">Fold</button>
-<button class="myButton" id="double">Double Down</button>
+<button class="myButton" id="stay2">Stay2</button>
+<button class="myButton" id="again">again</button>
+<button class="myButton" id="double">Double</button>
 <button class="myButton" id="split">Split</button>
+<button class="myButton" id="start">Start</button>
 </div>
 
 <footer>
-
 </footer>
 </body>
 </html>
+
+<script>
+//more on double
+	var g;
+	var a;
+	var size_p;
+	var size_d;
+	var size_p1;
+	var dealer_value;
+	size_p=0;
+	size_p1=0;
+	size_d=0;
+function display (game){
+	document.getElementById("hit2").disabled=false;
+	document.getElementById("stay2").disabled=false;
+	document.getElementById("hit").disabled=false;
+	document.getElementById("stay").disabled=false;
+	document.getElementById("again").disabled=false;
+	document.getElementById("double").disabled=false;
+	document.getElementById("split").disabled=false;	
+		$( '.cards .cardLocation' ).html("");
+		$.each(game.player.holder[0], function( key, val ) {
+			if (key>=size_p){
+				$( '#c0 .l'+key ).prepend('<img class="card" src=" assets/images/'+val.suit+ '/'+val.value+'.jpg" />')
+			}
+		});
+		 $.each(game.dealer.holder[0], function( key, val ) {
+			if (key>=size_d){
+				$( '#c1 .l'+key ).prepend('<img class="card" src=" assets/images/'+val.suit+ '/'+val.value+'.jpg" />')
+			}
+			if(game.user_win==0 && game.user_win_s==0){
+					$('#c1 .l0').empty();
+					$('#c1 .l0').prepend('<img class="card" src=" assets/images/cardback.jpg"/>')
+				}
+				else {
+					$('#c1 .l0').empty();
+					$('#c1 .l0').prepend('<img class="card" src=" assets/images/'+game.dealer.holder[0][0].suit+'/'+game.dealer.holder[0][0].value+'.jpg"/>')
+			}
+		});
+		$.each(game.player_s.holder[0], function( key, val ) {
+			if (key>=size_p1 && game.split==true){
+				$( '#c2 .l'+key ).prepend('<img class="card" src=" assets/images/'+val.suit+ '/'+val.value+'.jpg" />')
+			}
+		});
+		$("#number").html(game.player.bet);
+		$("#number_1").html(game.bet_amount);
+		$("#Y_value").html(game.P_value);
+		$("#Y_value_s").html(game.P_value_s);
+		$("#D_value").html(game.D_value);
+		if(game.user_win==0){
+			$("#reslut2").html(" ");
+		}
+		if (game.user_win==1){
+			$("#reslut2").html("you win, Click again to start a new round");
+		}
+		if (game.user_win==2){
+			$("#reslut2").html("dealer win, Click again to start a new round");
+		}
+		if (game.user_win==3){
+			$("#reslut2").html("push, Click again to start a new round");
+		}
+		if(game.user_win_s==0){
+			$("#reslut3").html(" ");
+		}
+		if (game.user_win_s==1){
+			$("#reslut3").html("you win, Click again to start a new round");
+		}
+		if (game.user_win_s==2){
+			$("#reslut3").html("dealer win, Click again to start a new round");
+		}
+		if (game.user_win_s==3){
+			$("#reslut3").html("push, Click again to start a new round");
+		}
+		if(game.user_win==0){
+			$("#D_value").empty();
+			var d;
+			if (game.dealer.holder[0][0].value <10){
+				d=game.D_value-game.dealer.holder[0][0].value;
+			}
+			else{
+				d=game.D_value-10;
+			}
+			$("#D_value").html(d);
+		}
+		if (game.user_win!=0){
+			document.getElementById("hit").disabled = true;
+			document.getElementById("stay").disabled=true;
+			document.getElementById("start").disabled=true;
+			document.getElementById("double").disabled=true;
+			document.getElementById("split").disabled=true;
+		}
+		if (game.user_win_s!=0){
+			document.getElementById("hit2").disabled=true;
+			document.getElementById("stay2").disabled=true;
+		}
+		size_p=game.player.card_count;
+		size_d=game.dealer.card_count;
+		size_p1=game.player_s.card_count;
+		if(game.player_s.card_count!=0&&game.user_win_s==0){
+			document.getElementById("hit2").disabled=false;
+			document.getElementById("stay2").disabled=false;
+		}
+		else {
+			document.getElementById("hit2").disabled=true;
+			document.getElementById("stay2").disabled=true;
+		}
+	}
+function remove_card (game) {
+	$( '.cards .cardLocation' ).html("");
+		$.each(game.player.holder[0], function( key, val ) {
+			$( '#c0 .l'+key ).empty();
+		});
+		$.each(game.player_s.holder[0], function( key, val ) {
+			$( '#c2 .l'+key ).empty();
+		});
+		 $.each(game.dealer.holder[0], function( key, val ) {
+			$( '#c1 .l'+key ).empty();
+		});
+	size_d=0;
+	size_p=0;
+	size_p1=0;
+}
+
+$.getJSON("http://localhost:8080/gameS", function( data ) {
+	g = data;
+	document.getElementById("hit2").disabled=true;
+	document.getElementById("stay2").disabled=true;
+	document.getElementById("hit").disabled=true;
+	document.getElementById("stay").disabled=true;
+	document.getElementById("again").disabled=true;
+	document.getElementById("double").disabled=true;
+	document.getElementById("split").disabled=true;	
+ 
+});	
+	
+	
+$("#start").click(function(){
+	$.ajax({
+	  type: "POST",
+	  url: "/gameStart",
+	  data: JSON.stringify(g),
+	  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+			g = data;
+			display(data);},
+	  contentType:"application/json; charset=utf-8",
+	  dataType:"json",
+	});
+	//disable_button(g);
+});
+
+function hit_card (){
+$.ajax({
+type: "POST",
+url: "/dealGame",
+data: JSON.stringify(g),
+success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+g = data;
+display(data);},
+contentType:"application/json; charset=utf-8",
+dataType:"json",
+});
+}
+
+function hit_card_2 (){
+$.ajax({
+type: "POST",
+url: "/dealGame2",
+data: JSON.stringify(g),
+success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+g = data;
+display(data);},
+contentType:"application/json; charset=utf-8",
+dataType:"json",
+});
+}
+
+function re_start (){
+$.ajax({
+type: "POST",
+url: "/reStart",
+data: JSON.stringify(g),
+success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+g = data;
+display(data);},
+contentType:"application/json; charset=utf-8",
+dataType:"json",
+});
+
+}
+
+function stay (){
+$.ajax({
+type: "POST",
+url: "/stand",
+data: JSON.stringify(g),
+success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+g = data;
+display(data);},
+contentType:"application/json; charset=utf-8",
+dataType:"json",
+});
+
+}
+
+function Double (){
+$.ajax({
+type: "POST",
+url: "/double",
+data: JSON.stringify(g),
+success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+g = data;
+display(data);},
+contentType:"application/json; charset=utf-8",
+dataType:"json",
+});
+
+}
+
+function Split (){
+$.ajax({
+type: "POST",
+url: "/split",
+data: JSON.stringify(g),
+success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+g = data;
+display(data);},
+contentType:"application/json; charset=utf-8",
+dataType:"json",
+});
+
+}
+
+$("#stay").click(function () {
+  if (g.player_s.card_count==0){
+	stay();
+  }
+  else {
+	document.getElementById("hit").disabled = true;
+	document.getElementById("stay").disabled=true;
+	document.getElementById("start").disabled=true;
+	document.getElementById("double").disabled=true;
+  }
+});
+$("#stay2").click(function () {
+	stay();
+});
+$("#hit").click(function () {
+	hit_card();
+});
+$("#hit2").click(function () {
+	hit_card_2();
+});
+$("#double").click(function () {
+	Double();
+});
+$("#split").click(function (){
+	 if(g.player.holder[0][0].value==g.player.holder[0][1].value){
+		$( '.cards .cardLocation' ).html("");
+		$( '#c0 .l1' ).empty();
+		size_p=g.player.card_count-1;
+		Split();
+		document.getElementById("double").style.visibility="hidden";
+	}
+});
+$("#again").click(function () {
+	remove_card(g);
+	re_start();
+	document.getElementById("hit").disabled =false;
+	document.getElementById("stay").disabled=false;
+	document.getElementById("start").disabled=false;
+	document.getElementById("double").disabled=false;
+	document.getElementById("split").disabled=false;
+	document.getElementById("hit2").disabled=false;
+	document.getElementById("stay2").disabled=false;
+			document.getElementById("double").style.visibility="visible";
+
+});
+
+
+
+
+
+
+
+
+
+
+</script>
