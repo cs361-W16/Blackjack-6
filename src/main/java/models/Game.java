@@ -153,6 +153,11 @@ public class Game {
         }
         return check;
     }
+    public void double_down (){
+        player.bet-=bet_amount;
+        bet_amount+=bet_amount;
+        deal_player();
+    }
     public void customDeal_p (int c1){
         player.holder.get(0).add(deck.get(c1));
         deck.remove(c1);

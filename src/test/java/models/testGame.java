@@ -123,4 +123,15 @@ public class testGame {
         assertEquals(0,g.player_s.card_count);
 
     }
+    @Test
+    public void test_double_down (){
+        Game g = new Game ();
+        g.buildDeck();
+        g.shuffle();
+        g.place_bet(20);
+        g.double_down();
+        assertEquals(40,g.bet_amount);
+        assertEquals(60,g.player.bet);
+        assertEquals(1,g.player.holder.get(0).size());
+    }
 }

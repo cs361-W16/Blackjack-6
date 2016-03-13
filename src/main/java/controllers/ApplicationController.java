@@ -165,4 +165,92 @@ public class ApplicationController {
         }
         return Results.json().render(g);
     }
+    public Result Double(Context context, Game g) {
+        if(context.getRequestPath().contains("double")){
+            g.place_bet(g.bet_amount);
+            g.deal_player();
+            g.P_value=g.player.calculate();
+            if (g.P_value==21){
+                g.assign_bet();
+                g.user_win=1;
+            }
+            else if (g.P_value>21){
+                g.user_win=2;
+            }else {
+                while (g.dealer.calculate_d() < 17) {
+                    g.deal_dealer();
+                }
+                g.D_value = g.dealer.calculate_d();
+                if (g.compare() == 1) {
+                    g.assign_bet();
+                    g.user_win = 1;
+                } else if (g.compare() == 2) {
+                    g.user_win = 2;
+                } else {
+                    g.player.bet += g.bet_amount;
+                    g.user_win = 3;
+                }
+            }/*  g.buildDeck();
+            g.shuffle();
+            g.player.holder.get(1).clear();
+            // g.player.holder.get(1).clear();
+            g.dealer.holder.get(1).clear();*/
+        }
+        return Results.json().render(g);
+    }
+    public Result Double_s(Context context, Game g) {
+        if(context.getRequestPath().contains("double_s")){
+            g.place_bet(g.bet_amount);
+            g.deal_player_s();/*
+            g.P_value_s=g.player.calculate();
+            if (g.P_value_s==21){
+                g.assign_bet();
+                g.user_win=1;
+            }
+            else if (g.P_value_s>21){
+                g.user_win=2;
+            }else {
+                while (g.dealer.calculate_d() < 17) {
+                    g.deal_dealer();
+                }
+                g.D_value = g.dealer.calculate_d();
+                if (g.compare() == 1) {
+                    g.assign_bet();
+                    g.user_win = 1;
+                } else if (g.compare() == 2) {
+                    g.user_win = 2;
+                } else {
+                    g.player.bet += g.bet_amount;
+                    g.user_win = 3;
+                }
+            }/*  g.buildDeck();
+            g.shuffle();
+            g.player.holder.get(1).clear();
+            // g.player.holder.get(1).clear();
+            g.dealer.holder.get(1).clear();*/
+        }
+        return Results.json().render(g);
+    }
+    public Result Restart (Context context, Game g){
+        if(context.getRequestPath().contains("reStart")) {
+            g.buildDeck();
+            g.shuffle();
+            g.bet_amount=0;
+            g.player.holder.get(0).clear();
+            g.player.card_count=0;
+            g.player.Ace=false;
+            g.dealer.holder.get(0).clear();
+            g.dealer.card_count=0;
+            g.split=false;
+            g.bet_amount=0;
+            g.player_s.holder.get(0).clear();
+            g.player_s.card_count=0;
+            g.user_win=0;
+            g.P_value=0;
+            g.D_value=0;
+            g.P_value_s=0;
+            g.user_win_s=0;
+        }
+        return Results.json().render(g);
+    }
 }
