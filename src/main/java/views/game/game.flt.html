@@ -22,16 +22,37 @@ h3{
     position: relative; 
     font-family: Arial, Helveica, sans-serif;
 }
-#intro{
+#intro,#intro2{
 	float:left;
 	font-family: Arial, Helveica, sans-serif;
 	width:20%;
+	height:80em;
 }
 #balance{
 	font-family: Arial, Helveica, sans-serif;
 }
-
-
+.col{
+	font-family: Arial, Helveica, sans-serif;
+	font-size:130%;
+	text-align:center;
+}
+h5{
+	font-family: Arial, Helveica, sans-serif;
+	font-size:90%;
+}
+.sb_result{
+	font-family: Arial, Helveica, sans-serif;
+	color:red;
+	font-size:140%;
+}
+#number,#number_1{
+	font-family: Arial, Helveica, sans-serif;
+	color:blue;
+	font-size:120%
+}
+#cctv{
+	color:#6A0888;
+}
 
 
 
@@ -81,7 +102,10 @@ h3{
 	<p id="welcome"> Welcome to Black Jack !!!</p>
 <div id="intro">
 <h3>Rules of Black Jack</h3>
-<ol>
+<ul>
+<li><mark> Click "Hit" to get a new card, Click "Hit2" to get a new card for your splited cards</mark> </li>
+<li><mark> Click "Stay" to stop getting new card and check who is winner. Click "Stay2" to stop getting card for splited cards and check winner.</mark></li>
+<li><mark> Click "Double" to double bet and a new card, then check who is winner.</mark></li>
 <li>After all the players have dealt their hand, the dealer will show all the cards in their hand.</li>
 <li>The dealer then adds up their cards according to the rules. For Aces, the dealer must score them as 11, unless doing so causes them to bust. (lose the hand)</li>
 <li> If the dealer's hand is worth less then 17, the dealer will hit </li>
@@ -89,22 +113,30 @@ h3{
 <li> If at any point the dealer's hand is worth more then 21, then the dealer immediately looses and the player wins.</li>
 <li> At the end of the round, any player with more points then the dealer's hand (but both are less then 21) wins.</li>
 <li> If they have the same amount of points, then the money stays where it is, and a new game is started.</li>
-</ol>
+<br><br>
+<li id="cctv">Created by CS361 Group#6: Wenbo Hou, Jiawei Liu, Zhaoheng Wang, Xiaoyong Zheng </li>
+</ul>
+</div>
+
+<div id="intro2">
+<p> &nbsp &nbsp&nbsp&nbsp&nbsp</p>
+
 </div>
 
 <div id="balance">
-<h4>Your Balance: <span id="number"> </span>  Bet Amount: <span id="number_1"> </span></h4><br><br>
+<h4>Your Balance: <span id="number"> </span> &nbsp&nbsp&nbsp&nbsp Bet Amount: <span id="number_1"> </span></h4><br><br>
 </div>
 
 <div id="game">
 	<table class="sbgame">
-		<tr class="title">
+		<!--<tr class="title">
 			<td class="col">Player</td>
 			<td class="col">Dealer</td>
 		</tr>
-
+-->
 		<tr><td class="columnOfCards" id="c0">
 			<table>
+				<tr><td class="col">Player</td></tr>
 				<tr><td class="cardLocation l0"></td></tr>
 				<tr><td class="cardLocation l1"></td></tr>
 				<tr><td class="cardLocation l2"></td></tr>
@@ -116,6 +148,7 @@ h3{
 		</td>
 			<td class="columnOfCards" id="c2">
 			<table>
+				
 				<tr><td class="cardLocation l0"></td></tr>
 				<tr><td class="cardLocation l1"></td></tr>
 				<tr><td class="cardLocation l2"></td></tr>
@@ -127,6 +160,7 @@ h3{
 		</td>
 			<td class="columnOfCards" id="c1">
 				<table>
+				<tr><td class="col">Dealer</td></tr>
 					<tr><td class="cardLocation l0"></td></tr>
 					<tr><td class="cardLocation l1"></td></tr>
 					<tr><td class="cardLocation l2"></td></tr>
@@ -138,20 +172,22 @@ h3{
 			</td>
 		</tr>
 	</table>
-	<h5>Your value: <span id="Y_value"> </span> Your second hand value: <span id="Y_value_s"> </span> Dealer value: <span id="D_value"> </span></h5>
-	<h6><span id="reslut2"> </span> </h6>
-	<h6><span id="reslut3"> </span> </h6>
+	<h5>Your value: <span id="Y_value"> </span> &nbsp&nbsp&nbsp&nbsp Dealer value: <span id="D_value"> </span> <br><br> You splited cards value: <span id="Y_value_s"> </span>  </h5>
+	<h4 class="sb_result"> <span id="reslut2"> </span> </h4>
+	<h4 class="sb_result"> <span id="reslut3"> </span> </h4>
 </div>
 
 <div id="sbchoose">
 <button class="myButton" id="hit">Hit</button>
-<button class="myButton" id="hit2">Hit2</button>
+
 <button class="myButton" id="stay">Stay</button>
-<button class="myButton" id="stay2">Stay2</button>
+
 <button class="myButton" id="again">again</button>
 <button class="myButton" id="double">Double</button>
 <button class="myButton" id="split">Split</button>
-<button class="myButton" id="start">Start</button>
+<button class="myButton" id="start">Start</button><br><br>
+<button class="myButton" id="hit2">Hit2</button>
+<button class="myButton" id="stay2">Stay2</button>
 </div>
 
 <footer>
